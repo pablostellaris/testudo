@@ -1,0 +1,10 @@
+{
+  "name": "vacatures-extension",
+  "version": "0.1.0",
+  "scripts": {
+    "test": "xp test"
+  },
+  "devDependencies": {
+    "xp": "*"
+  }
+}
