@@ -1,0 +1,10 @@
+{
+  "name": "testudo-extension",
+  "version": "0.1.0",
+  "description": "Chrome-extensie die ongezond nieuws filtert",
+  "scripts": {
+    "test": "echo \"Geen tests gedefinieerd\""
+  },
+  "author": "Pablo",
+  "license": "MIT"
+}
