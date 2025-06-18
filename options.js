@@ -23,4 +23,7 @@ function save() {
 }
 
 document.addEventListener('DOMContentLoaded', restore);
-document.getElementById('save').addEventListener('click', save);
+document.getElementById('save').addEventListener('click', ev => {
+  ev.preventDefault();
+  save();
+});
