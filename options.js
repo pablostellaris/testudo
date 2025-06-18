@@ -1,29 +1,34 @@
-const defaults = { violence: true, sexual: true, corruption: true };
+const defaults = {
+  violence: true,
+  sexual: true,
+  corruption: true
+};
+
+function save() {
+  const settings = {};
+  Object.keys(defaults).forEach(key => {
+    const input = document.querySelector(`input[name="${key}"]`);
+    if (input) settings[key] = input.checked;
+  });
+
+  chrome.storage.sync.set(settings, () => {
+    const status = document.getElementById('status');
+    status.textContent = 'Opgeslagen!';
+    setTimeout(() => status.textContent = '', 1500);
+  });
+}
 
 function restore() {
-  chrome.storage.sync.get(defaults, items => {
+  chrome.storage.sync.get(null, items => {
     Object.keys(defaults).forEach(key => {
       const input = document.querySelector(`input[name="${key}"]`);
-      if (input) input.checked = items[key];
+      if (input) input.checked = items.hasOwnProperty(key) ? items[key] : defaults[key];
     });
   });
 }
 
-function save() {
-  const data = {};
-  Object.keys(defaults).forEach(key => {
-    const input = document.querySelector(`input[name="${key}"]`);
-    if (input) data[key] = input.checked;
-  });
-  chrome.storage.sync.set(data, () => {
-    const s = document.getElementById('status');
-    s.textContent = 'Instellingen opgeslagen';
-    setTimeout(() => s.textContent = '', 1000);
-  });
-}
-
 document.addEventListener('DOMContentLoaded', restore);
-document.getElementById('save').addEventListener('click', ev => {
-  ev.preventDefault();
-  save();
-});
+const saveButton = document.getElementById('save');
+if (saveButton) {
+  saveButton.addEventListener('click', save);
+}
